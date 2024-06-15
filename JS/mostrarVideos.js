@@ -19,9 +19,14 @@ export default function crearCard(titulo,descripcion,url,imagem){
 }
 
 async function listarVideos(){
-    const listaAPI = await conexionAPI.listarVideos();
+    try{
+        const listaAPI = await conexionAPI.listarVideos();
 
-    listaAPI.forEach(video=>lista.appendChild(crearCard(video.titulo,video.descripcion,video.url,video.imagem)));
+        listaAPI.forEach(video=>lista.appendChild(crearCard(video.titulo,video.descripcion,video.url,video.imagem)))
+    }catch{
+        lista.innerHTML=`<h2 class="mensaje__titulo">Ha Ocurrido un problema con la conexión</h2>`;
+    }
+        
 }
 
 listarVideos()

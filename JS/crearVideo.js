@@ -2,7 +2,7 @@ import { conexionAPI } from "./conexionAPI.js";
 
 const formulario = document.querySelector("[data-formulario]");
 
- async function crearVideo(evento){
+async function crearVideo(evento){
     
     evento.preventDefault();
 
@@ -12,10 +12,12 @@ const formulario = document.querySelector("[data-formulario]");
 
     const descripcion = Math.floor(Math.random*10).toString();
 
-    await conexionAPI.enviarVideo(titulo,descripcion,url,imagem);
-
-    window.location.href="../pages/envio-concluido.html";
-
+    try{
+        await conexionAPI.enviarVideo(titulo,descripcion,url,imagem);
+        window.location.href="../pages/envio-concluido.html";
+    }catch(e){
+        alert(e)
+    }
 }
 
 formulario.addEventListener("submit",evento => crearVideo(evento));
